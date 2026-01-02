@@ -1,0 +1,33 @@
+# DeepSeek-OCR Replicate Configuration
+# https://github.com/replicate/cog
+
+build:
+  gpu: true
+  cuda: "11.8"
+  python_version: "3.12"
+  
+  system_packages:
+    - "libgl1-mesa-glx"
+    - "libglib2.0-0"
+    - "libsm6"
+    - "libxext6"
+    - "libxrender-dev"
+  
+  python_packages:
+    - "torch==2.6.0"
+    - "torchvision==0.21.0"
+    - "torchaudio==2.6.0"
+    - "transformers==4.46.3"
+    - "tokenizers==0.20.3"
+    - "einops"
+    - "addict"
+    - "easydict"
+    - "pillow>=10.0.0"
+    - "accelerate"
+    - "safetensors"
+  
+  run:
+    # Install flash-attention (requires special build flags)
+    - "pip install flash-attn==2.7.3 --no-build-isolation"
+
+predict: "predict.py:Predictor"
